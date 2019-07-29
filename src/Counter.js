@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
+import { increment, decrement } from './action';
 
 
 function mapStateToProps(state) {
@@ -21,10 +22,9 @@ class Counter extends React.Component {
 //       count: this.state.count - 1
 //     });
 //   };
-  //state = { count: 0 };
   
-  increment = () => {this.props.dispatch({ type: "INCREMENT" });};
-  decrement = () => {this.props.dispatch({ type: "DECREMENT" });};
+  increment = () => {this.props.increment();}
+  decrement = () => {this.props.decrement();}
   render() {
     return (
       <div>
@@ -39,5 +39,8 @@ class Counter extends React.Component {
   }
 }
 
-// export default Counter;
-export default connect(mapStateToProps)(Counter);
+const mapDispatchToProps = {
+    increment, decrement
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
