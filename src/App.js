@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Counter from "./Counter"
 import { createStore } from 'redux';
@@ -28,12 +27,8 @@ function reducer(state = init, action) {
 
 const store = createStore(reducer);
 
-store.dispatch({ type: "INCREMENT" });
-store.dispatch({ type: "INCREMENT" });
-store.dispatch({ type: "INCREMENT" });
-store.dispatch({ type: "INCREMENT" });
-store.dispatch({ type: "INCREMENT" });
-
+// store.dispatch({ type: "INCREMENT" });
+// store.dispatch({ type: "DECREMENT" });
 
 const App = () => (
   <Provider store={store}>
