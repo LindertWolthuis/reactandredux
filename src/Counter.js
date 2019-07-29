@@ -8,27 +8,29 @@ function mapStateToProps(state) {
         count: state.count
     };
 }
-class Counter extends React.Component {
-   state = { count: 0 };
+function Counter ({count, increment, decrement}) {
+//    state = { count: 0 };
  
-  increment = () => {this.props.increment();}
-  decrement = () => {this.props.decrement();}
-  render() {
+//   increment = () => {this.props.increment();}
+//   decrement = () => {this.props.decrement();}
+//   render() {
     return (
       <div>
         <h2>React-Redux</h2>
         <div>
-          <button onClick={this.increment}>+</button><br></br>
-          <span>{this.props.count}</span><br></br>
-          <button onClick={this.decrement}>-</button><br></br>
+          <button onClick={increment}>+</button><br></br>
+          <span>{count}</span><br></br>
+          <button onClick={decrement}>-</button><br></br>
         </div>
       </div>
     );
-  }
+//   }
 }
-
-const mapDispatchToProps = {
-    increment, decrement
-};
+const mapDispatchToProps = dispatch => (
+    {
+      increment: () => dispatch(increment()),
+      decrement: () => dispatch(decrement())
+    }
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
