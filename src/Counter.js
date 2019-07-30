@@ -1,14 +1,15 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { increment, decrement } from './action';
+import { increment, decrement, asyncIncrement, asyncDecrement } from './action';
 
 
 function mapStateToProps(state) {
     return {
+        isFetching: state.isFetching,
         count: state.count
     };
 }
-function Counter ({count, increment, decrement}) {
+function Counter ({count, isFetching, increment, decrement}) {
 //    state = { count: 0 };
  
 //   increment = () => {this.props.increment();}
@@ -18,9 +19,9 @@ function Counter ({count, increment, decrement}) {
       <div>
         <h2>React-Redux</h2>
         <div>
-          <button onClick={increment}>+</button><br></br>
+          <button onClick={increment} disabled={isFetching}>+</button><br></br>
           <span>{count}</span><br></br>
-          <button onClick={decrement}>-</button><br></br>
+          <button onClick={decrement} disabled={isFetching}>-</button><br></br>
         </div>
       </div>
     );
@@ -28,8 +29,8 @@ function Counter ({count, increment, decrement}) {
 }
 const mapDispatchToProps = dispatch => (
     {
-      increment: () => dispatch(increment()),
-      decrement: () => dispatch(decrement())
+      increment: () => dispatch(asyncIncrement()),
+      decrement: () => dispatch(asyncDecrement())
     }
 );
 

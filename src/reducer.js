@@ -1,3 +1,5 @@
+import { INCREMENT, REQUEST, RECEIVE } from "./action";
+
   const init = {
     count: 0
   };
@@ -18,4 +20,32 @@
         return state;
     }
   }
-  export default reducer;
+  
+  const asyncInit = {
+    isIncrement: INCREMENT,
+    isFetching: false,
+    count: 0
+  }
+  function asyncReducer(state = asyncInit, action) {
+    switch(action.type) {
+      case REQUEST:
+        return {...state, 
+          isFetching: true
+        }
+      case RECEIVE:
+          if(action.isIncrement.type == INCREMENT)
+          return {
+            isFetching: false,
+            count: state.count + 1
+          }
+        else
+          return {
+            isFetching: false,
+            count: state.count - 1
+          }
+      default:
+        return asyncInit;
+    }
+  }
+
+  export default asyncReducer;
